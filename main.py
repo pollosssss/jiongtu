@@ -7,10 +7,12 @@ from concurrent.futures import ThreadPoolExecutor
 
 url = 'https://www.gamersky.com/ent/147/'
 pool = ThreadPoolExecutor(max_workers=10)
-root_path = ''
+root_path = './images/'
 path = ""
 # 发送HTTP请求并获取页面内容
 def fetch_pics():
+    if not os.path.exists(root_path):
+        os.mkdir(root_path)
     responses = requests.get(url)
     if responses.status_code == 200:
         soup = BeautifulSoup(responses.text, 'html.parser')
